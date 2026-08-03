@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Editor from "./Editor";
+import Editor from "./Editor.vue";
 
 export default {
   name: "app",

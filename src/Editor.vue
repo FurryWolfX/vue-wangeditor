@@ -11,7 +11,8 @@
   }
   export default {
     name: "Editor",
-    props: ["value", "mobileFilter", "contentHeight"],
+    props: ["modelValue", "mobileFilter", "contentHeight"],
+    emits: ["update:modelValue"],
     mounted() {
       this.editor = new window.wangEditor(this.$refs.container);
       this.editor.customConfig.uploadImgServer = "/upload";
@@ -39,7 +40,7 @@
           const dom = parseDom("<div>" + html + "</div>");
           html = this.filterMobileImage(dom);
         }
-        this.$emit("input", html);
+        this.$emit("update:modelValue", html);
       };
       this.editor.customConfig.uploadFileName = "file";
       this.editor.customConfig.uploadImgHooks = {
@@ -71,7 +72,7 @@
       }
     },
     watch: {
-      value: {
+      modelValue: {
         handler(newValue) {
           this.setContent(newValue);
         },
